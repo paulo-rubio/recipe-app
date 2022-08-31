@@ -10,6 +10,7 @@ const mockLocalDoneRecipes = [
   { id: '178319', type: 'drink', nationality: '', category: 'Cocktail', alcoholicOrNot: 'Alcoholic', name: 'Aquamarine', image: 'https://www.thecocktaildb.com/images/media/drink/zvsre31572902738.jpg', doneDate: '23/06/2020', tags: [],
   },
 ];
+
 const done = '/done-recipes';
 
 describe('Testa a tela de Done-Recipes', () => {
@@ -18,32 +19,32 @@ describe('Testa a tela de Done-Recipes', () => {
       writeText: () => { },
     },
   });
-  it('Verifica se é renderizado três botões na tela', () => {
+  it('Verifica se é renderizado três botões na tela', async () => {
     localStorage.clear();
     localStorage.setItem('doneRecipes', JSON.stringify(mockLocalDoneRecipes));
     const { history } = renderWithRouterAndRedux(<App />);
     history.push(done);
 
-    const btnFood = screen.getByTestId('filter-by-food-btn');
-    expect(btnFood).toBeInTheDocument();
+    const btnFood = await screen.findByTestId('filter-by-food-btn');
+    expect(btnFood).toBeDefined();
     userEvent.click(btnFood);
     const img = screen.getAllByTestId(/horizontal-image/i);
     expect(img).toHaveLength(1);
 
-    const btnAll = screen.getByTestId('filter-by-all-btn');
-    expect(btnAll).toBeInTheDocument();
+    const btnAll = await screen.findByTestId('filter-by-all-btn');
+    expect(btnAll).toBeDefined();
     userEvent.click(btnAll);
     const text = screen.getAllByTestId(/horizontal-top-text/i);
     expect(text).toHaveLength(2);
 
-    const btnDrink = screen.getByTestId('filter-by-drink-btn');
-    expect(btnDrink).toBeInTheDocument();
+    const btnDrink = await screen.findByTestId('filter-by-drink-btn');
+    expect(btnDrink).toBeDefined();
     userEvent.click(btnDrink);
     const date = screen.getAllByTestId(/horizontal-done-date/i);
     expect(date).toHaveLength(1);
   });
 
-  it('Verifica se é renderizado as informações da receita', () => {
+  it('Verifica se é renderizado as informações da receita', async () => {
     localStorage.clear();
     localStorage.setItem('doneRecipes', JSON.stringify(mockLocalDoneRecipes));
     const { history } = renderWithRouterAndRedux(<App />);
@@ -61,21 +62,21 @@ describe('Testa a tela de Done-Recipes', () => {
     const date = screen.getAllByTestId(/horizontal-done-date/i);
     expect(date).toHaveLength(2);
 
-    const btnShare = screen.getByTestId('0-horizontal-share-btn');
-    expect(btnShare).toBeInTheDocument();
+    const btnShare = await screen.findByTestId('0-horizontal-share-btn');
+    expect(btnShare).toBeDefined();
   });
 
-  it('Verifica funcionalidade do clipboard ', () => {
+  it('Verifica funcionalidade do clipboard ', async () => {
     localStorage.clear();
     localStorage.setItem('doneRecipes', JSON.stringify(mockLocalDoneRecipes));
     const { history } = renderWithRouterAndRedux(<App />);
     history.push(done);
 
     jest.spyOn(navigator.clipboard, 'writeText');
-    const btnShare = screen.getByTestId('0-horizontal-share-btn');
+    const btnShare = await screen.findByTestId('0-horizontal-share-btn');
     userEvent.click(btnShare);
 
-    expect(screen.getByText(/link copied!/i)).toBeInTheDocument();
+    expect(screen.getByText(/link copied!/i)).toBeDefined();
     expect(navigator.clipboard.writeText).toHaveBeenCalledWith('http://localhost/foods/52771');
   });
 });

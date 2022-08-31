@@ -31,14 +31,14 @@ describe('tests in progress', () => {
     const firstIngredient = await screen.findByTestId(firstIngredientId);
     const btnFinish = await screen.findByTestId(buttonFinishId);
 
-    expect(title).toBeInTheDocument();
-    expect(image).toBeInTheDocument();
-    expect(category).toBeInTheDocument();
-    expect(favBtn).toBeInTheDocument();
-    expect(shareBtn).toBeInTheDocument();
-    expect(instruc).toBeInTheDocument();
-    expect(firstIngredient).toBeInTheDocument();
-    expect(btnFinish).toBeInTheDocument();
+    expect(title).toBeDefined();
+    expect(image).toBeDefined();
+    expect(category).toBeDefined();
+    expect(favBtn).toBeDefined();
+    expect(shareBtn).toBeDefined();
+    expect(instruc).toBeDefined();
+    expect(firstIngredient).toBeDefined();
+    expect(btnFinish).toBeDefined();
     expect(btnFinish).toBeDisabled();
   });
 

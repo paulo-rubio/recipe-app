@@ -76,7 +76,6 @@ function Recipes() {
       const progres = JSON.parse(localStorage.getItem('inProgressRecipes'));
       const verification = Object.keys(progres[keyOfInprogress])
         .some((item) => item === id);
-      console.log(verification);
       if (verification) {
         setTextRecipes('Continue Recipe');
       }
@@ -100,8 +99,8 @@ function Recipes() {
       } if (endpoint === 'drinks') {
         const fetchRecipes = await endpointByIdDrinks(id);
         buildIngredients(await fetchRecipes);
-        setRecomendacao(await endpointDrinkRecomendation());
         setRecipes(fetchRecipes);
+        setRecomendacao(await endpointDrinkRecomendation());
       }
     };
     testFoodOrDrink();
@@ -120,7 +119,6 @@ function Recipes() {
           </button>
         )
       }
-
       <RecipeDetails
         keys={ keys }
         endpoint={ endpoint }
