@@ -12,3 +12,9 @@
   top: 100;
   z-index: 90;
 }
+
+body {
+  height: 30%;
+  justify-content: center;
+  width: 60%;
+}

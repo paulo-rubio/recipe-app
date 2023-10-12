@@ -1,9 +1,7 @@
 import React from 'react';
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { Carousel } from 'react-bootstrap';
 import { renderWithRouterAndRedux } from './RenderWith';
-import carrossel from './__mockCarrossel';
 import favIcon from '../images/blackHeartIcon.svg';
 import notFavIcon from '../images/whiteHeartIcon.svg';
 
